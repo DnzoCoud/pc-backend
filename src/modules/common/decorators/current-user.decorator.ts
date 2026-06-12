@@ -3,6 +3,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
 
+export interface AuthenticatedUser {
+  id: string;
+  email: string;
+  jti: string;
+}
+
 export const CurrentUser = createParamDecorator(
   (_data: unknown, context: ExecutionContext) => {
     const request = context.switchToHttp().getRequest();
