@@ -11,6 +11,10 @@ export class UserRepository implements IUserRepository {
     private readonly repository: Repository<UserEntity>,
   ) {}
 
+  existsByEmail(email: string): Promise<boolean> {
+    return this.repository.existsBy({ email });
+  }
+
   async save(user: UserEntity): Promise<UserEntity> {
     return this.repository.save(user);
   }
