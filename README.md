@@ -9,7 +9,7 @@ Before starting the application, make sure you have installed:
 * npm
 
 ## Environment Variables
-You have already the .env file
+You have already the `.env` file
 
 ### Example:
 
