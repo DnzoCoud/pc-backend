@@ -2,29 +2,54 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('users')
-export class User {
-  @PrimaryColumn()
-  id: number;
+@Entity({ name: 'users' })
+export class UserEntity {
+  @PrimaryColumn('uuid')
+  id!: string;
 
-  @Column()
-  phoneNumber: string;
+  @Column({
+    type: 'varchar',
+    length: 120,
+  })
+  name!: string;
 
-  @Column({ unique: true })
-  email: string;
+  @Index('IDX_USERS_EMAIL', { unique: true })
+  @Column({
+    type: 'varchar',
+    length: 255,
+    unique: true,
+  })
+  email!: string;
 
-  @Column()
-  password: string;
+  @Column({
+    name: 'phone_number',
+    type: 'varchar',
+    length: 30,
+  })
+  phoneNumber!: string;
 
-  @UpdateDateColumn()
-  lastUpdateAt: Date;
+  @Column({
+    name: 'password_hash',
+    type: 'varchar',
+    length: 255,
+    select: false,
+  })
+  passwordHash!: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp with time zone',
+  })
+  createdAt!: Date;
 
-  constructor() {}
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp with time zone',
+  })
+  updatedAt!: Date;
 }
