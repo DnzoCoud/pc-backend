@@ -5,6 +5,7 @@ import { JwtStrategy } from './config/jwt.strategy';
 import { AUTH_SERVICE, TOKEN_SERVICE } from './auth.constants';
 import { JwtTokenService } from './services/jwt-token.service';
 import { AuthService } from './services/auth.service';
+import { AuthController } from './controller/auth.controller';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AuthService } from './services/auth.service';
       },
     }),
   ],
+  controllers: [AuthController],
   providers: [
     JwtStrategy,
     {
