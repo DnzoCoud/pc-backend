@@ -11,6 +11,16 @@ export class UserRepository implements IUserRepository {
     private readonly repository: Repository<UserEntity>,
   ) {}
 
+  findByEmailWithPassword(email: string): Promise<UserEntity | null> {
+    return this.repository
+      .createQueryBuilder('user')
+      .addSelect('user.passwordHash')
+      .where('user.email = :email', {
+        email,
+      })
+      .getOne();
+  }
+
   existsByEmail(email: string): Promise<boolean> {
     return this.repository.existsBy({ email });
   }

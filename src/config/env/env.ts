@@ -6,6 +6,8 @@ export const env = {
   node: {
     environment: parsedEnv.NODE_ENV,
     port: parsedEnv.PORT,
+    jwt_secret: parsedEnv.JWT_SECRET,
+    jwt_expires: parsedEnv.JWT_EXPIRES_IN,
   },
 
   database: {
