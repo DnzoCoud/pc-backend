@@ -25,6 +25,7 @@ export class UserService implements IUsersService {
 
     newUser.name = dto.name;
     newUser.email = dto.email;
+    newUser.phoneNumber = dto.phoneNumber;
 
     newUser.passwordHash = await bcrypt.hash(dto.password, 10);
 

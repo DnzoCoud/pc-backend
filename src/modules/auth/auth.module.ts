@@ -6,15 +6,19 @@ import { AUTH_SERVICE, TOKEN_SERVICE } from './auth.constants';
 import { JwtTokenService } from './services/jwt-token.service';
 import { AuthService } from './services/auth.service';
 import { AuthController } from './controller/auth.controller';
-
+import type { StringValue } from 'ms';
+import { UsersModule } from '../users/users.module';
+import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
+    PassportModule,
     JwtModule.register({
       secret: env.node.jwt_secret,
       signOptions: {
-        expiresIn: env.node.jwt_expires,
+        expiresIn: env.node.jwt_expires as StringValue,
       },
     }),
+    UsersModule,
   ],
   controllers: [AuthController],
   providers: [
@@ -28,5 +32,6 @@ import { AuthController } from './controller/auth.controller';
       useClass: AuthService,
     },
   ],
+  exports: [AUTH_SERVICE, TOKEN_SERVICE],
 })
 export class AuthModule {}

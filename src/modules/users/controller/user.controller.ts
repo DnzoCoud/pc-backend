@@ -4,15 +4,15 @@ import {
   Get,
   Inject,
   Param,
+  ParseUUIDPipe,
   Post,
-  UseGuards,
 } from '@nestjs/common';
+import { Auth } from 'src/modules/common/decorators/auth.decorator';
+import { CreateUserDto } from '../dto/create-user.dto';
 import { type IUsersService } from '../services/users.service.interface';
 import { USER_SERVICE } from '../users.constants';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { JwtAuthGuard } from 'src/modules/common/guards/jwt-auth.guard';
 
-@Controller('users')
+@Controller('/users')
 export class UserController {
   constructor(
     @Inject(USER_SERVICE)
@@ -27,10 +27,10 @@ export class UserController {
     return this.userService.create(dto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get(':id')
   findById(
-    @Param('id')
+    @Param('id', new ParseUUIDPipe())
     id: string,
   ) {
     return this.userService.findById(id);
