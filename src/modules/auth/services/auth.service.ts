@@ -49,6 +49,7 @@ export class AuthService implements IAuthService {
     const accessToken = await this.tokenService.generateAccessToken(
       user.id,
       user.email,
+      user.role,
     );
 
     this.auditService.publish({

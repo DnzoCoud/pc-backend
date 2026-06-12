@@ -10,6 +10,7 @@ export class UserMapper {
       phoneNumber: entity.phoneNumber,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
+      role: entity.role,
     };
   }
 }

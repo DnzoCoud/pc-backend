@@ -1,3 +1,5 @@
+import { UserRole } from '../models/user-role.enum';
+
 export class UserResponseDto {
   id!: string;
   name!: string;
@@ -5,4 +7,5 @@ export class UserResponseDto {
   phoneNumber!: string;
   createdAt!: Date;
   updatedAt!: Date;
+  role!: UserRole;
 }

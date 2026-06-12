@@ -9,7 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Auth } from 'src/modules/common/decorators/auth.decorator';
+import { Auth, AuthAdmin } from 'src/modules/common/decorators/auth.decorator';
 import {
   type AuthenticatedUser,
   CurrentUser,
@@ -56,8 +56,8 @@ export class UserController {
     return this.userService.findById(user.id);
   }
 
+  @AuthAdmin()
   @Patch('/profile/me')
-  @Auth()
   @ApiOperation({
     summary: 'Update my profile',
   })
